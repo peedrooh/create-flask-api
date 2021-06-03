@@ -1,0 +1,16 @@
+# -*- Migration Initialization -*-
+#
+#   Here we are initializing the project migrations. It will take care 
+# of the db tables versioning and proper ORM. 
+# Flask-Migrate documentation: https://flask-migrate.readthedocs.io/en/latest/
+# Useful Commands:
+#   * flask db init -> starts the versioning folder
+#   * flask db migrate -m "Usefull message." -> generate the migration
+#   * flask db upgrade -> apply the migration(s)
+
+
+from flask import Flask
+from flask_migrate import Migrate
+
+def init_app(app: Flask):
+    Migrate(app, app.db)

@@ -1,0 +1,17 @@
+#                     -*- Application Factory -*-
+# 
+#   This file is used to create and configure your application.
+# 
+# App setup documentation: https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/
+
+from flask import Flask
+
+from app import configurations
+
+
+def create_app():
+    app = Flask(__name__)
+
+    configurations.init_app(app)
+
+    return app

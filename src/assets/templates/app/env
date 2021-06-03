@@ -1,0 +1,21 @@
+# Flask environment variables documentation: https://flask.palletsprojects.com/en/1.1.x/config/
+# This file is used to set the application environment variables. It can vary from developer to developer
+# so it should not be committed to the remote git repository
+
+# Here you should add your application entry-point (app.__init__:create_app).
+FLASK_APP=app.__init__:create_app
+
+# Here you should add the enviroment (production, development)
+FLASK_ENV=development
+
+# Here you can enable the debug-mode, normaly used when the application is in development mode.
+FLASK_DEBUG=True
+
+# Here you add the port you want to run your application.
+FLASK_RUN_PORT=5001
+
+# Here you can add the database URI that should be used for the connection (postgresql://USER:PASSWORD@localhost:PORT/DBNAME)
+SQLALCHEMY_DATABASE_URI=
+
+# Here you can add a string used for criptography (normaly a jwt token)
+SECRET_KEY=

@@ -1,0 +1,15 @@
+#                -*- Authentication Initialization -*-
+# 
+#   This library is used to create authenticated routes, encrypt passwords,
+# generate tokens, and more. You can see it in action in the view and model 
+# files, here we are only initializing it.
+# 
+# JWT extendend documentation: https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
+
+
+from flask import Flask
+from flask_jwt_extended import JWTManager
+
+
+def init_app(app: Flask):
+    JWTManager(app)

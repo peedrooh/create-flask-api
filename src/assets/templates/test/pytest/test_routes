@@ -1,0 +1,51 @@
+def test_signup(client, user_data):
+    """
+        Route: /user/login
+        Methods: POST
+        Input: email(str), username(str), password(str)
+        Output: {id(int), email(str), username(str)}, 201(HTTP Status)
+    """
+
+    result = client.post("/users/signup", json=user_data)
+    
+    assert result.status_code == 201, f"Should create a user and return 201"
+
+
+def test_login(client, user_data):
+    """
+        Route: /user/login
+        Methods: POST
+        Input: email(str), password(str)
+        Output: {access_token(str), fresh_token(str)}, 200(HTTP Status)
+    """
+
+    # SIGNUP
+    client.post("/users/signup", json=user_data)
+
+    # LOGIN
+    user_data.pop("username")
+    result = client.post("/users/login", json=user_data)
+
+    assert result.status_code == 200, f"Should login and return 200"
+
+
+def test_refresh_token(client, user_data):
+    """
+        Route: /user/refresh
+        Methods: GET
+        Header: {Authorization: Bearer fresh_token}
+        Output: {access_token(str)}, 200(HTTP Status)
+    """
+    
+    # SIGNUP
+    client.post("/users/signup", json=user_data)
+
+    # LOGIN
+    user_data.pop("username")
+    fresh_token = client.post("/users/login", json=user_data).get_json()["fresh_token"]
+
+    # TOKEN REFRESH
+    headers = {"Authorization": "Bearer " + fresh_token}
+    result = client.get("/users/refresh", headers=headers)
+    
+    assert result.status_code == 200, f"Should refresh and return 200"

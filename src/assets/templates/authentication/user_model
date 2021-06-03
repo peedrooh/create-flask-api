@@ -1,0 +1,32 @@
+#                           -*- Model Example -*-
+# 
+#   The model is the application dynamic data structure. It is responsible
+# for managing the data. Since we are using SQLAlquemy(Object Relational Mapping)
+# the data is represented using objects/classes and therefore it will not only contain 
+# the data but also manipulate it if you want.
+# 
+# Model documentation: https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/
+
+
+from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
+
+class UserModel(db.Model):
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False, unique=True)
+    password_hash = db.Column(db.String, nullable=False)
+
+    @property
+    def password(self):
+        raise TypeError("The password cannot be read.")
+
+    @password.setter
+    def password(self, new_password):
+        self.password_hash = generate_password_hash(new_password)
+
+
+    def check_password(self, given_password):
+        return check_password_hash(self.password_hash, given_password)

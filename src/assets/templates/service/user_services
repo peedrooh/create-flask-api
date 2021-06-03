@@ -1,0 +1,40 @@
+#                     -*- Service Exemple -*-
+# 
+#   Here you can provide logic to operate the data that you want to 
+# send to the client and the data that you will persist at your database.
+
+
+from app.configurations.database import db
+from app.models.user_model import UserModel
+
+from flask_jwt_extended import (
+    create_access_token,
+    create_refresh_token
+)
+from datetime import timedelta
+
+
+class UserService():
+
+    @staticmethod
+    def create(attrs):
+        session = db.session
+
+        user = UserModel(**attrs)
+
+        session.add(user)
+        session.commit()
+
+        return user
+        
+    
+    @staticmethod
+    def login(attrs):
+        session = db.session
+
+        user = UserModel.query.filter_by(email=attrs.get("email")).first()
+
+        if not user or not user.password == attrs.get("password"):
+            raise AttributeError("Invalid credentials.")
+
+        return user

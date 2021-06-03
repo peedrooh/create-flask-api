@@ -1,0 +1,19 @@
+#                     -*- Serializer Example -*-
+# 
+#   Here you will 'translate' the model data structure into a format 
+# that you want to send the client. This is done using the flask 
+# Marshmallow library.
+# 
+# Marshmallow documentation: https://flask-marshmallow.readthedocs.io/en/latest/
+
+
+from app.models.user_model import UserModel
+
+
+def UserSerializer(user: UserModel):
+
+    return {
+        "id": user.id,
+        "username": user.username,
+        "email": user.email
+    }

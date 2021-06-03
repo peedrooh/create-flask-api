@@ -1,0 +1,48 @@
+#               -*- Defining test fixtures -*-
+#
+#   This file is suppost to contain all test helpers and static data.
+# They are created using pytest fixture decorator. It can be passed 
+# to any test in the test module by inserting them in the parameters 
+# when declaring the test function.
+#
+# Fixture's documentation: https://docs.pytest.org/en/6.2.x/fixture.html
+
+
+from os import environ
+
+from flask import Flask
+from pytest import fixture
+
+from app import create_app
+from app.models.user_model import UserModel
+
+
+@fixture
+def app():
+    environ["FLASK_ENV"] = "test"
+    return create_app()
+
+
+@fixture
+def db(app: Flask):
+    from app.configurations.database import db
+
+    with app.app_context():
+        db.create_all()
+        yield db
+        db.drop_all()
+        db.session.commit()
+
+
+@fixture
+def client(app: Flask, db):
+    return app.test_client()
+
+
+@fixture
+def user_data():
+    return {
+        "email": "generic@email.com",
+        "username": "any_name",
+        "password": "Qwerty123"
+    }

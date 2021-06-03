@@ -1,0 +1,12 @@
+from app.services import UserService
+
+def test_create(db, user_data):
+    """
+        Input: {email(str), username(str), password(str)}
+        Output: user(UserModel)
+    """
+    result = UserService.create(user_data)
+
+    assert result.id, f"User should have id."
+    assert result.email == user_data["email"], f"User email should be equal to {user_data['email']}"
+    assert result.username == user_data["username"], f"User id should be equal to {user_data['username']}"

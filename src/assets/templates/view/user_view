@@ -1,0 +1,48 @@
+#                        -*- View Exemple -*-
+# 
+#   This file must recive data and produces a response for the browser.
+# Here you must define the routes that will be accessed by a client and 
+# return the correct data. This is done using flask blueprints.
+# 
+# Blueprint documentation: https://flask.palletsprojects.com/en/1.1.x/blueprints/
+# View documentation: https://flask.palletsprojects.com/en/1.1.x/tutorial/views/
+
+
+from flask import Blueprint, request
+from http import HTTPStatus
+
+from app.serializers.user_serializer import UserSchema
+from app.services import UserService
+
+
+bp_user = Blueprint("bp_user", __name__, url_prefix="/users")
+
+
+@bp_user.route("/signup", methods=["POST"])
+def signup():
+    try:
+        req = request.get_json()
+
+        user = UserService.create(req)
+
+        serialized = UserSchema().dump(user)
+
+        return {"data": serialized}, HTTPStatus.CREATED
+        
+    except Exception as err:
+        return {"msg": err.args[0]}, HTTPStatus.BAD_REQUEST
+
+
+@bp_user.route("/login", methods=["POST"])
+def login():
+    try: 
+        req = request.get_json()
+
+        user = UserService.login(req)
+
+        serialized = UserSerializer(user)
+
+        return {"data": serialized}, HTTPStatus.OK
+
+    except AttributeError as err:
+        return {"msg": err.args[0]}, HTTPStatus.BAD_REQUEST
