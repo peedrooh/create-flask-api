@@ -7,7 +7,7 @@ package_data = {'': ['*']}
 
 install_requires = ['pyfiglet>=0.8.post1,<0.9', 'PyInquirer>=1.0.3,<2.0.0', 'toml>=0.10.1,<0.11.0']
 
-entry_points = {'console_scripts': ['cfa=src']}
+entry_points = {'console_scripts': ['create-flask-api=__main__.py']}
 
 
 setup(
