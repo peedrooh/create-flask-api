@@ -24,14 +24,18 @@ def initial_messages():
     
 
 def main():
-    # try:
-    initial_messages()
-    args = parser.parse_args()
-    args.project_name = args.project_name.lower()
-    project_path = str(pathlib.Path().absolute())
-    project = ProjectSpecs(project_path, args)
-    build(project)
-    print("✨  Finished ✨\n")
+    try: 
+        initial_messages()
         
-    # except Exception as err:
-        # print("Something went wrong.")
+        args = parser.parse_args()
+        args.project_name = args.project_name.lower()
+        project_path = str(pathlib.Path().absolute())
+        
+        project = ProjectSpecs(project_path, args)
+
+        build(project)
+
+        print("✨  Finished ✨\n")
+        
+    except Exception as err:
+        print("Something went wrong.")
