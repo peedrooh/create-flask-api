@@ -9,6 +9,10 @@ install_requires = ['pyfiglet>=0.8.post1,<0.9', 'PyInquirer>=1.0.3,<2.0.0', 'tom
 
 entry_points = {'console_scripts': ['create-flask-api=create_flask_api.__main__:main']}
 
+long_description = """# Create Flask API
+
+"""
+
 
 setup(
     name='create-flask-api',
