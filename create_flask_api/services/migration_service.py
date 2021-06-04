@@ -1,6 +1,3 @@
-import sys, os
-from os.path import join
-
 from create_flask_api.project import ProjectSpecs
 from .mixins import FeatureMixin
 from create_flask_api.assets.file_paths.migration_paths import migration_paths

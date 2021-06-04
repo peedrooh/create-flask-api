@@ -1,7 +1,6 @@
 import os
 from PyInquirer import prompt
 
-
 from create_flask_api.styles import custom_style
 from create_flask_api.project import ProjectSpecs
 from .mixins import FeatureMixin
