@@ -1,18 +1,18 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
-packages = []
+packages = find_packages()
 
 package_data = {'': ['*']}
 
 install_requires = ['pyfiglet>=0.8.post1,<0.9', 'PyInquirer>=1.0.3,<2.0.0', 'toml>=0.10.1,<0.11.0']
 
-entry_points = {'console_scripts': ['create-flask-api=__main__.py']}
+entry_points = {'console_scripts': ['create-flask-api=create_flask_api.__main__:main']}
 
 
 setup(
-    name='create-flask-app',
-    version='0.0.1',
+    name='create-flask-api',
+    version='0.0.4',
     description='This is a create-react-app analog that creates a base Flask Aplication structure with boilerplates.',
     long_description='# Create Flask App\nThis is a create-react-app analog that creates a base Flask Aplication structure with boilerplates.\n# Usage\nAaaaaa',
     author='Pedro Henrique Germano Silva',
