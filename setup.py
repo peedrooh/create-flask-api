@@ -16,7 +16,7 @@ long_description = """# Create Flask API
 
 setup(
     name='create-flask-api',
-    version='0.0.4',
+    version='0.0.5',
     description='This is a create-react-app analog that creates a base Flask Aplication structure with boilerplates.',
     long_description='# Create Flask App\nThis is a create-react-app analog that creates a base Flask Aplication structure with boilerplates.\n# Usage\nAaaaaa',
     author='Pedro Henrique Germano Silva',
