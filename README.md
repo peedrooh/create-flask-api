@@ -35,14 +35,6 @@
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
-<style>
-.aligncenter {
-  width: 650px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
 
 <!-- ABOUT THE PROJECT -->
 
