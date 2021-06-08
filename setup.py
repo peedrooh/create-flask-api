@@ -16,7 +16,7 @@ entry_points = {'console_scripts': ['create-flask-api=create_flask_api.__main__:
 
 setup(
     name='create-flask-api',
-    version='0.0.6',
+    version='0.0.7',
     description='This is a create-react-app analog that creates a base Flask Aplication structure with boilerplates.',
     long_description_content_type="text/markdown",
     long_description=README,
