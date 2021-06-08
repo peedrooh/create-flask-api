@@ -18,6 +18,7 @@ setup(
     name='create-flask-api',
     version='0.0.6',
     description='This is a create-react-app analog that creates a base Flask Aplication structure with boilerplates.',
+    long_description_content_type="text/markdown",
     long_description=README,
     author='Pedro Henrique Germano Silva',
     author_email='pedrohenriquegs2001@gmail.com',
