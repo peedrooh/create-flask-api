@@ -1,5 +1,10 @@
+import pathlib
 from setuptools import setup, find_packages
 
+
+HERE = pathlib.Path(__file__).parent
+
+README = (HERE / "README.md").read_text()
 
 packages = find_packages()
 
@@ -9,16 +14,11 @@ install_requires = ['pyfiglet>=0.8.post1,<0.9', 'PyInquirer>=1.0.3,<2.0.0', 'tom
 
 entry_points = {'console_scripts': ['create-flask-api=create_flask_api.__main__:main']}
 
-long_description = """# Create Flask API
-
-"""
-
-
 setup(
     name='create-flask-api',
-    version='0.0.5',
+    version='0.0.6',
     description='This is a create-react-app analog that creates a base Flask Aplication structure with boilerplates.',
-    long_description='# Create Flask App\nThis is a create-react-app analog that creates a base Flask Aplication structure with boilerplates.\n# Usage\nAaaaaa',
+    long_description=README,
     author='Pedro Henrique Germano Silva',
     author_email='pedrohenriquegs2001@gmail.com',
     maintainer=None,

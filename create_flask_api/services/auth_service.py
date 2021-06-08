@@ -1,3 +1,7 @@
+from os.path import join
+from PyInquirer import prompt
+
+from create_flask_api.styles import custom_style
 from create_flask_api.project import ProjectSpecs
 from .mixins import FeatureMixin
 from create_flask_api.assets.file_paths.auth_paths import auth_path
@@ -20,6 +24,16 @@ class AuthService(FeatureMixin):
         
         self.commands = []
         
+    def make_questions(self):
+
+        for question in self.questions:
+            
+            answer = prompt(question, style=custom_style)
+            self.answers.append(answer)
+            
+            if not self.answers[0]['Authentication']:
+                break
+        
     
     def create_files(self):
         
@@ -36,4 +50,26 @@ class AuthService(FeatureMixin):
         if not self.answers[0]['Authentication'] == 'JWT-Extended':
 
             for file in self.files_to_fix_data:
+                self.fix_lines(**file)
+                
+        if len(self.answers) > 1:
+            
+            files_to_fix_data = [
+                {
+                    'file_path': join(self.project.project_path, '.env'),
+                    'lines_to_fix': ['SECRET_KEY='],
+                    'fixed_lines': [
+                        'SECRET_KEY=' + self.answers[1]['SECRET_KEY'],
+                    ]
+                },
+                {
+                    'file_path': join(self.project.project_path, '.env.example'),
+                    'lines_to_fix': ['SECRET_KEY='],
+                    'fixed_lines': [
+                        'SECRET_KEY=' + self.answers[1]['SECRET_KEY'],
+                    ]
+                },
+            ]
+            
+            for file in files_to_fix_data:
                 self.fix_lines(**file)
